@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets'
+import giraffeImage from '../images/jiraf-cropped.svg'
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the first "/"
+
+---
+<nav class="sticky top-0 z-50 flex justify-between items-center min-h-48 bg-backgroundColor">
+    <a href="/">home</a>
+    <!-- <a class="border border-primaryTextColor p-2" href="/"><Image src={giraffeImage} alt="Logo" class="filter-green" width={60} style={'height: 48px'}></Image></a> -->
+    <div class="flex flex-col">
+        <a class={currentPath === "about" ? "text-secondaryTextColor" : ""} href="/about">about me</a>
+        <a class={currentPath === "search" ? "text-secondaryTextColor" : ""} href="/search">search</a>
+    </div>
+</nav>
+
+
+<style>
+    .filter-green{
+        filter: brightness(0) saturate(100%) invert(100%) sepia(60%) saturate(1864%) hue-rotate(234deg) brightness(122%) contrast(113%);
+    }
+    /* .nav {
+        position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: space-between;
+    padding: 6rem 7rem 2rem;
+    transition: transform var(--transition-duration) ease-in-out;
+    } */
+    .hide-nav {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        transition: transform 0.2s ease-in-out;
+    }
+</style>
+
+<script>
+    let lastScrollTop=0;
+    const handleScroll = () => {
+        
+        const contentBody = document.querySelector("#content")!;
+        const navigation = document.querySelector("nav")!;
+
+        const currentScrollTop = contentBody.scrollTop;
+        console.log(currentScrollTop)
+
+        if(currentScrollTop<=0){
+            console.log("we're at top")
+        }
+        else if ( currentScrollTop > lastScrollTop && !navigation.classList.contains("hide-nav") ) {
+            console.log("scrolling down");
+            navigation.classList.add("hide-nav");
+        } else if ( currentScrollTop < lastScrollTop && navigation.classList.contains("hide-nav") ) {
+            console.log("scrolling up")
+            navigation.classList.remove("hide-nav");
+        }
+
+        lastScrollTop = currentScrollTop;
+
+    }
+    document.addEventListener("scroll", handleScroll, {
+      passive: true,
+      capture: true,
+    });
+</script>

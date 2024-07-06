@@ -1,0 +1,36 @@
+---
+import Nav from '../components/nav.astro';
+import Posts from '../components/posts.astro';
+// import Footer from '../components/Footer.astro';
+const { title } = Astro.props;
+const { description } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/images/favicon.ico" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+
+		<title>{title}</title>
+	</head>
+	<body class="bg-backgroundColor text-primaryTextColor font-thin flex justify-center mt-36">
+        <div class="w-mainWidth h-mainHeight border border-borderColor">
+            <div class="flex h-mainHeight">
+                <div id="content" class="flex flex-col overflow-y-scroll no-scrollbar basis-9/12 px-28">
+                    <Nav></Nav>
+                    <main class="h-full grow"><slot/></main>
+                </div>
+                <div class="min-w-48">
+                    <Posts></Posts>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

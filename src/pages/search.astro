@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/layout.astro'
+---
+<Layout title="Search blog posts page">
+    <div class="flex min-h-full items-center">
+        <input type="text" placeholder="search" name="search-articles" id="search-articles"
+        class="input"/>
+    </div>
+</Layout>
+
+<style>
+.input {
+  width: 80%;
+  outline: 0;
+  background-color: transparent;
+  color: var(--primary-text-color);
+  font: inherit;
+  font-size: xx-large;
+  border-width: 0 0 0.5px;
+  border-color: #faf9f680;
+  caret-color: #faf9f680;
+}
+.input:focus {
+  outline: none;
+}
+.input::placeholder {
+  color: #e58c4c80;
+  opacity: 1; /* Firefox */
+}
+</style>
